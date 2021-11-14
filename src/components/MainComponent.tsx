@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
-import {Button} from "./button";
-import {Link, NavLink} from "react-router-dom";
-import {PATH} from "../App";
 
 
-export type PropsComponent = {
+
+export type PropsMainComponent = {
     countValue: number
     incValue: () => void
     resetValue: () => void
+    countMaxValue:number
+
 }
 
-export const MainComponent = ({countValue, incValue, resetValue, ...props}: PropsComponent) => {
+export const MainComponent = ({countValue, incValue, resetValue,countMaxValue, ...props}: PropsMainComponent) => {
 
 
     return (<div>
 
-            <div className={'countBlock'} style={countValue === 5 ? {color: 'red'} : {color: ''}}>
+            <div className={'countBlock'} style={countValue === countMaxValue ? {color: 'red'} : {color: ''}}>
                 {countValue}
 
             </div>

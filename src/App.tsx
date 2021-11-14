@@ -11,30 +11,57 @@ export const PATH = {
 }
 
 function App() {
+    const [countMinValue, setCountMinValue] = useState(0)
+    const changeMinValue = (e:any) => {
+        let eValue = Number(e.currentTarget.value)
+        if (eValue >= 0) {
+            setCountMinValue(eValue)
+            console.log(countMinValue)
+            //setCountValue(countMinValue)
+            if(countMaxValue<=countMinValue){
+                setCountMaxValue(countMinValue+1)
+            }
+            if(countValue<=countMinValue){
+                setCountValue(countMinValue+1)
+            }
+        }
+    }
+    const [countMaxValue, setCountMaxValue] = useState(countMinValue)
+    const changeMaxValue = (e:any) => {
 
-    let startValue = 0
-    const [countValue, setCountValue] = useState(startValue)
+        let eValue = Number(e.currentTarget.value)
+        if (eValue >= countMinValue) {
+            setCountMaxValue(eValue)
+        }
+        if (eValue<countMinValue) {
+            setCountMaxValue(countMinValue )
+        }
+    }
+
+    const [countValue, setCountValue] = useState(countMinValue)
     const incValue = () => {
         setCountValue(countValue + 1)
     }
     const resetValue = () => {
-        setCountValue(0)
+        setCountValue(countMinValue)
     }
     const [path, setPath] = useState(PATH.SET)
     const changePath = () => {
+
         if (path === PATH.SET) {
             setPath(PATH.MAIN)
+
         }
         if (path === PATH.MAIN) {
             setPath(PATH.SET)
         }
     }
 
-    const blockButtons1 = () => {
+    const blockButtonsIncReset = () => {
         return (
             <div className={'buttonBlock'}>
-                <Button name={'inc'} callback={incValue} disabled={countValue === 5}/>
-                <Button name={'reset'} callback={resetValue} disabled={countValue === 0}/>
+                <Button name={'inc'} callback={incValue} disabled={countValue === countMaxValue}/>
+                <Button name={'reset'} callback={resetValue} disabled={countValue === countMinValue}/>
 
                 <NavLink to={path}>
                     <Button name={'set'} callback={changePath} disabled={false}/>
@@ -42,7 +69,7 @@ function App() {
 
             </div>)
     }
-    const blockButtons2 = () => {
+    const blockButtonSet = () => {
         return (
             <div className={'buttonBlock'}>
 
@@ -63,16 +90,22 @@ function App() {
 
                         <Route path='/' element={<MainComponent resetValue={resetValue}
                                                                 countValue={countValue}
+                                                                countMaxValue={countMaxValue}
                                                                 incValue={incValue}/>}/>
                         <Route path={PATH.MAIN} element={<MainComponent resetValue={resetValue}
                                                                         countValue={countValue}
+                                                                        countMaxValue={countMaxValue}
                                                                         incValue={incValue}/>}/>
                         <Route path={PATH.SET} element={<SetComponent resetValue={resetValue}
-                                                                      countValue={countValue}
-                                                                      incValue={incValue}/>}/>
+                                                                      countMinValue={countMinValue}
+                                                                      countMaxValue={countMaxValue}
+                                                                      incValue={incValue}
+                                                                      changeMinValue={changeMinValue}
+                                                                      changeMaxValue={changeMaxValue}
+                        />}/>
 
                     </Routes>
-                    {path === PATH.SET ? blockButtons1() : blockButtons2()}
+                    {path === PATH.SET ? blockButtonsIncReset() : blockButtonSet()}
 
                 </header>
             </div>

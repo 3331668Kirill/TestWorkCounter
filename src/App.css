@@ -48,3 +48,9 @@
   width: 150px;
   border: lightskyblue solid 3px;
 }
+.setBlock{
+  height: 120px;
+  width: 150px;
+  border: lightskyblue solid 3px;
+  font-size: 15px;
+}
