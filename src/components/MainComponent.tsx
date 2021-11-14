@@ -1,25 +1,24 @@
-import React from 'react';
-import {InputField} from "./input";
+import React, {useState} from 'react';
 import {Button} from "./button";
+import {Link, NavLink} from "react-router-dom";
+import {PATH} from "../App";
 
 
-export const MainComponent = () => {
-    let countValue = 1
+export type PropsComponent = {
+    countValue: number
+    incValue: () => void
+    resetValue: () => void
+}
 
+export const MainComponent = ({countValue, incValue, resetValue, ...props}: PropsComponent) => {
 
 
     return (<div>
 
-            <div>
-                <InputField countValue={countValue} changeTitle={()=>{}} onKeyPressAddTask={()=>{}}/>
-            </div>
-            <div>
-                <Button name={'inc'} callback={()=>{}} />
-                <Button name={'reset'} callback={()=>{}} />
-                <Button name={'set'} callback={()=>{}} />
-            </div>
+            <div className={'countBlock'} style={countValue === 5 ? {color: 'red'} : {color: ''}}>
+                {countValue}
 
-
+            </div>
 
         </div>
 

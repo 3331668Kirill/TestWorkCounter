@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.countBlock{
+  height: 120px;
+  width: 150px;
+  border: lightskyblue solid 3px;
+  font-size: 40px;
+}
+.buttonBlock{
+  height: 40px;
+  width: 150px;
+  border: lightskyblue solid 3px;
+}
