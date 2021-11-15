@@ -41,23 +41,32 @@
   height: 120px;
   width: 150px;
   border: lightskyblue solid 3px;
-  font-size: 40px;
+  font-size: 80px;
+  border-radius: 5px;
 }
 .buttonBlock{
+  margin: 5px;
+  padding-top: 10px;
   height: 40px;
   width: 150px;
   border: lightskyblue solid 3px;
+  border-radius: 5px;
 }
 .setBlock{
   height: 120px;
   width: 150px;
   border: lightskyblue solid 3px;
+  border-radius: 5px;
   font-size: 15px;
 }
 .setBlockRed{
+  margin: 5px;
   height: 120px;
   width: 150px;
   border: red solid 3px;
   background-color: crimson;
   font-size: 15px;
+}
+.button{
+  background-color: lightskyblue;
 }

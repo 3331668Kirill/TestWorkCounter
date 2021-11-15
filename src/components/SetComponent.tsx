@@ -19,7 +19,7 @@ export const SetComponent = ({countMinValue,countMaxValue,
 
     return(
         <div>
-            <div className={countMinValue===0? 'setBlockRed' :'setBlock'} >
+            <div className={countMinValue===0 ? 'setBlockRed' :'setBlock'} >
                 <label>
                     set min value:
                 <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue} />

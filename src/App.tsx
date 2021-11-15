@@ -20,7 +20,7 @@ function App() {
     let countStartMinValue = Number(localStorage.getItem('countMinValue'))
     const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
     const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        //console.log(e.currentTarget.)
+        //console.log(e.currentTarget)
         let eValue = Number(e.currentTarget.value)
         if (eValue >= 0) {
             setCountMinValue(eValue)
@@ -117,7 +117,9 @@ function App() {
                         />}/>
 
                     </Routes>
-                    {path === PATH.SET ? blockButtonsIncReset() : blockButtonSet()}
+                    {/*{path === PATH.SET ? blockButtonsIncReset() : blockButtonSet()}*/}
+                    {path === PATH.SET && blockButtonsIncReset() }
+                    {path === PATH.MAIN && blockButtonSet() }
 
                 </header>
             </div>
