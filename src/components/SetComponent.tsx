@@ -14,18 +14,19 @@ export type PropsSetComponent = {
 
 export const SetComponent = ({countMinValue,countMaxValue,
                                  incValue, resetValue,
-                                 changeMinValue,changeMaxValue,...props}:PropsSetComponent) => {
+                                 changeMinValue,
+                                 changeMaxValue,...props}:PropsSetComponent) => {
 
     return(
         <div>
-            <div className={'setBlock'} >
+            <div className={countMinValue===0? 'setBlockRed' :'setBlock'} >
                 <label>
                     set min value:
-                <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue} onKeyPressAddTask={()=>{}}/>
+                <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue} />
                 </label>
                 <label>
                     set max value:
-                <InputField type={'number'} countValue={countMaxValue} changeValue={changeMaxValue} onKeyPressAddTask={()=>{}}/>
+                <InputField type={'number'} countValue={countMaxValue} changeValue={changeMaxValue} />
                 </label>
             </div>
 

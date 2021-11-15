@@ -3,11 +3,10 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 type InputPropsType = {
     countValue: number|undefined
     changeValue: (event: ChangeEvent<HTMLInputElement>) => void
-    onKeyPressAddTask: (event: KeyboardEvent<HTMLInputElement>) => void
     type:string
 }
 
-export const InputField = ({countValue, changeValue, onKeyPressAddTask, type, ...props}: InputPropsType) => {
+export const InputField = ({countValue, changeValue, type, ...props}: InputPropsType) => {
 
     return (
         <input
@@ -15,7 +14,7 @@ export const InputField = ({countValue, changeValue, onKeyPressAddTask, type, ..
             value={countValue}
             type={type}
             onChange={changeValue}
-            onKeyPress={onKeyPressAddTask}
+
         />
 
     )

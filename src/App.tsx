@@ -1,46 +1,56 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {MainComponent} from "./components/MainComponent";
 import {HashRouter, NavLink, Route, Routes} from "react-router-dom";
 import {SetComponent} from "./components/SetComponent";
 import {Button} from "./components/button";
 
-export const PATH = {
+type TypePath = {
+    MAIN:string
+    SET:string
+}
+
+export const PATH:TypePath = {
     MAIN: 'main',
     SET: 'set',
 }
 
 function App() {
-    const [countMinValue, setCountMinValue] = useState(0)
-    const changeMinValue = (e:any) => {
+    let countStartMaxValue = Number(localStorage.getItem('countMaxValue'))
+    let countStartMinValue = Number(localStorage.getItem('countMinValue'))
+    const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
+    const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
+        //console.log(e.currentTarget.)
         let eValue = Number(e.currentTarget.value)
         if (eValue >= 0) {
             setCountMinValue(eValue)
-            console.log(countMinValue)
-            //setCountValue(countMinValue)
-            if(countMaxValue<=countMinValue){
-                setCountMaxValue(countMinValue+1)
+            localStorage.setItem('countMinValue', JSON.stringify(eValue))
+
+            if (countMaxValue <= countMinValue) {
+                setCountMaxValue(countMinValue + 1)
             }
-            if(countValue<=countMinValue){
-                setCountValue(countMinValue+1)
+            if (countValue <= countMinValue) {
+                setCountValue(countMinValue + 1)
             }
         }
     }
-    const [countMaxValue, setCountMaxValue] = useState(countMinValue)
-    const changeMaxValue = (e:any) => {
-
+    const [countMaxValue, setCountMaxValue] = useState<number>(countStartMaxValue)
+    const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         let eValue = Number(e.currentTarget.value)
         if (eValue >= countMinValue) {
             setCountMaxValue(eValue)
+            localStorage.setItem('countMaxValue', JSON.stringify(eValue))
         }
-        if (eValue<countMinValue) {
-            setCountMaxValue(countMinValue )
+        if (eValue < countMinValue) {
+            setCountMaxValue(countMinValue)
+            localStorage.setItem('countMaxValue', JSON.stringify(eValue))
         }
     }
 
-    const [countValue, setCountValue] = useState(countMinValue)
+    const [countValue, setCountValue] = useState<number>(countMinValue)
     const incValue = () => {
         setCountValue(countValue + 1)
+
     }
     const resetValue = () => {
         setCountValue(countMinValue)
@@ -54,8 +64,10 @@ function App() {
         }
         if (path === PATH.MAIN) {
             setPath(PATH.SET)
+
         }
     }
+
 
     const blockButtonsIncReset = () => {
         return (

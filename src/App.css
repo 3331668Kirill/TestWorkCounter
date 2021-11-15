@@ -54,3 +54,10 @@
   border: lightskyblue solid 3px;
   font-size: 15px;
 }
+.setBlockRed{
+  height: 120px;
+  width: 150px;
+  border: red solid 3px;
+  background-color: crimson;
+  font-size: 15px;
+}
