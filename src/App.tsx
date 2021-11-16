@@ -96,7 +96,7 @@ function App() {
             </div>)
     }
     const [blockColor, setBlockColor] = useState('setBlock')
-    const onMouseDown: MouseEventHandler<HTMLDivElement> = () => {
+    const onMouseDown: MouseEventHandler<HTMLLabelElement> = () => {
 
         setBlockColor('setBlockRed')
         setTimeout(() => setBlockColor('setBlock'), 1000)

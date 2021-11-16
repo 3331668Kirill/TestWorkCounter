@@ -9,7 +9,7 @@ export type PropsSetComponent = {
     countMinValue: number
     countMaxValue: number
     blockColor:string
-    onMouseDown:MouseEventHandler<HTMLDivElement>
+    onMouseDown:MouseEventHandler<HTMLLabelElement>
     changeMinValue: (event: ChangeEvent<HTMLInputElement>) => void
     changeMaxValue: (event: ChangeEvent<HTMLInputElement>) => void
 
@@ -24,8 +24,8 @@ export const SetComponent = ({
 
     return (
         <div>
-            <div className={countMinValue === 0 ? blockColor : 'setBlock'} onMouseDown={onMouseDown} tabIndex={0}>
-                <label>
+            <div className={countMinValue === 0 ? blockColor : 'setBlock'}>
+                <label  onMouseDown={onMouseDown} tabIndex={0}>
                     set min value:
                     <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue}/>
                 </label>
