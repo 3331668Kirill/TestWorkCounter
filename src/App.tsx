@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, MouseEventHandler, useEffect, useState} from 'react';
 import './App.css';
 import {MainComponent} from "./components/MainComponent";
 import {HashRouter, NavLink, Route, Routes} from "react-router-dom";
@@ -6,11 +6,11 @@ import {SetComponent} from "./components/SetComponent";
 import {Button} from "./components/button";
 
 type TypePath = {
-    MAIN:string
-    SET:string
+    MAIN: string
+    SET: string
 }
 
-export const PATH:TypePath = {
+export const PATH: TypePath = {
     MAIN: 'main',
     SET: 'set',
 }
@@ -20,12 +20,10 @@ function App() {
     let countStartMinValue = Number(localStorage.getItem('countMinValue'))
     const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
     const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        //console.log(e.currentTarget)
+
         let eValue = Number(e.currentTarget.value)
         if (eValue >= 0) {
             setCountMinValue(eValue)
-            localStorage.setItem('countMinValue', JSON.stringify(eValue))
-
             if (countMaxValue <= countMinValue) {
                 setCountMaxValue(countMinValue + 1)
             }
@@ -39,11 +37,11 @@ function App() {
         let eValue = Number(e.currentTarget.value)
         if (eValue >= countMinValue) {
             setCountMaxValue(eValue)
-            localStorage.setItem('countMaxValue', JSON.stringify(eValue))
+
         }
         if (eValue < countMinValue) {
             setCountMaxValue(countMinValue)
-            localStorage.setItem('countMaxValue', JSON.stringify(eValue))
+
         }
     }
 
@@ -67,7 +65,13 @@ function App() {
 
         }
     }
+    useEffect(() => {
+        localStorage.setItem('countMinValue', JSON.stringify(countMinValue))
+    }, [countMinValue])
 
+    useEffect(() => {
+        localStorage.setItem('countMaxValue', JSON.stringify(countMaxValue))
+    }, [countMaxValue])
 
     const blockButtonsIncReset = () => {
         return (
@@ -91,7 +95,13 @@ function App() {
 
             </div>)
     }
+    const [blockColor, setBlockColor] = useState('setBlock')
+    const onMouseDown: MouseEventHandler<HTMLDivElement> = () => {
 
+        setBlockColor('setBlockRed')
+        setTimeout(() => setBlockColor('setBlock'), 1000)
+
+    }
 
     return (
         <HashRouter>
@@ -112,14 +122,16 @@ function App() {
                                                                       countMinValue={countMinValue}
                                                                       countMaxValue={countMaxValue}
                                                                       incValue={incValue}
+                                                                      blockColor={blockColor}
+                                                                      onMouseDown={onMouseDown}
                                                                       changeMinValue={changeMinValue}
                                                                       changeMaxValue={changeMaxValue}
                         />}/>
 
                     </Routes>
                     {/*{path === PATH.SET ? blockButtonsIncReset() : blockButtonSet()}*/}
-                    {path === PATH.SET && blockButtonsIncReset() }
-                    {path === PATH.MAIN && blockButtonSet() }
+                    {path === PATH.SET && blockButtonsIncReset()}
+                    {path === PATH.MAIN && blockButtonSet()}
 
                 </header>
             </div>
