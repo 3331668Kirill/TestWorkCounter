@@ -26,10 +26,10 @@ export const PATH: TypePath = {
 function App() {
     let countStartMaxValue = Number(localStorage.getItem('countMaxValue'))
     let countStartMinValue = Number(localStorage.getItem('countMinValue'))
-    const[buttonDisabled, setButtonDisabled] = useState(false)
-    const setCounter2 = () =>{
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const setCounter2 = () => {
         setButtonDisabled(!buttonDisabled)
-       // setCountValue(100)
+        // setCountValue(100)
     }
     const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
     const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,11 +38,11 @@ function App() {
         if (eValue >= 0) {
             setCountMinValue(eValue)
             if (countMaxValue <= countMinValue) {
-                setCountMaxValue(countMinValue+1)
+                setCountMaxValue(countMinValue + 1)
             }
             if (Number(localStorage.getItem('countValue')) <= countMinValue) {
                 let value = Number(localStorage.getItem('countMinValue'))
-                setCountValue(value+1)
+                setCountValue(value + 1)
             }
         }
     }
@@ -94,7 +94,7 @@ function App() {
         localStorage.setItem('countValue', JSON.stringify(countValue))
     }, [countValue])
 
-    const blockButtonsIncReset = (t:string) => {
+    const blockButtonsIncReset = (t: string) => {
         return (
             <div className={'buttonBlock'}>
                 <Button name={'inc'} callback={incValue} disabled={countValue === countMaxValue}/>
@@ -106,7 +106,7 @@ function App() {
 
             </div>)
     }
-    const blockButtonSet = (t:string) => {
+    const blockButtonSet = (t: string) => {
         return (
             <div className={'buttonBlock'}>
 
@@ -156,7 +156,7 @@ function App() {
                                                                        buttonDisabled={buttonDisabled}
 
 
-                          />}
+                        />}
                         />
 
                         <Route path={PATH.SET} element={<SetComponent resetValue={resetValue}
@@ -173,9 +173,11 @@ function App() {
                     {path === PATH.COUNTER1 && blockButtonsIncReset(PATH.SET)}
                     {path === PATH.SET && blockButtonSet(PATH.COUNTER1)}
                     {path === PATH.HOME && null}
-
-
+                    <NavLink to={PATH.HOME}>
+                        <Button name={'HOME'} callback={() => changePath('/')} disabled={false}/>
+                    </NavLink>
                 </header>
+
             </div>
 
         </HashRouter>

@@ -26,7 +26,7 @@ export const Counter2 = ({
                             {blockColor === 'setBlockRed' && countMinValue === 0
                                 ? <div style={{color: 'red', fontSize: '20px'}}>Incorrect value</div>
                                 : null}
-                    </div>
+                        </div>
                     )
                     : <MainComponent resetValue={resetValue}
                                      countValue={countValue}
