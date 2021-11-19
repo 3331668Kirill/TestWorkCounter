@@ -7,10 +7,11 @@ export type PropsMainComponent = {
     incValue: () => void
     resetValue: () => void
     countMaxValue:number
+    blockColor?:string
 
 }
 
-export const MainComponent = ({countValue, incValue, resetValue,countMaxValue, ...props}: PropsMainComponent) => {
+export const MainComponent = ({countValue, incValue, resetValue,countMaxValue,blockColor, ...props}: PropsMainComponent) => {
 
 
     return (<div>
