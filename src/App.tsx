@@ -1,6 +1,5 @@
 import React, {ChangeEvent, MouseEventHandler, useEffect, useState} from 'react';
 import './App.css';
-import {MainComponent} from "./components/MainComponent";
 import {HashRouter, Navigate, NavLink, Route, Routes} from "react-router-dom";
 import {SetComponent} from "./components/SetComponent";
 import {Button} from "./components/button";

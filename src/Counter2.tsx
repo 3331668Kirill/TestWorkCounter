@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-import {NavLink, Route, Routes} from "react-router-dom";
-import App, {PATH} from "./App";
+import React from 'react';
 import {MainComponent, PropsMainComponent} from "./components/MainComponent";
 import {PropsSetComponent, SetComponent} from "./components/SetComponent";
 import {Button} from "./components/button";

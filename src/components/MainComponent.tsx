@@ -8,11 +8,9 @@ export type PropsMainComponent = {
     resetValue: () => void
     countMaxValue:number
     blockColor?:string
-
 }
 
 export const MainComponent = ({countValue, incValue, resetValue,countMaxValue,blockColor, ...props}: PropsMainComponent) => {
-
 
     return (<div>
 
@@ -24,5 +22,4 @@ export const MainComponent = ({countValue, incValue, resetValue,countMaxValue,bl
         </div>
 
     )
-
 }

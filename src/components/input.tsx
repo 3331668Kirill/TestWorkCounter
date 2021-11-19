@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent} from "react";
 
 type InputPropsType = {
     countValue: number|undefined
@@ -14,7 +14,6 @@ export const InputField = ({countValue, changeValue, type, ...props}: InputProps
             value={countValue}
             type={type}
             onChange={changeValue}
-
         />
 
     )

@@ -23,8 +23,6 @@ const changePath = () =>{
                         <span>COUNTER 2</span>
                     </NavLink>
                 </div>
-
-
             </div>
         </>
     )
