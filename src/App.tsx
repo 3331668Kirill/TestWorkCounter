@@ -24,60 +24,15 @@ export const PATH: TypePath = {
 }
 
 function App() {
+    let initialPath: string | null = '/'
     let countStartMaxValue = Number(localStorage.getItem('countMaxValue'))
     let countStartMinValue = Number(localStorage.getItem('countMinValue'))
     const [buttonDisabled, setButtonDisabled] = useState(false)
-    const setCounter2 = () => {
-        setButtonDisabled(!buttonDisabled)
-        // setCountValue(100)
-    }
     const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
-    const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setButtonDisabled(false)
-        let eValue = Number(e.currentTarget.value)
-        if (eValue >= 0) {
-            setCountMinValue(eValue)
-            if (countMaxValue <= countMinValue) {
-                setCountMaxValue(countMinValue + 1)
-            }
-            if (Number(localStorage.getItem('countValue')) <= countMinValue) {
-                let value = Number(localStorage.getItem('countMinValue'))
-                setCountValue(value + 1)
-            }
-        }
-    }
-
     const [countMaxValue, setCountMaxValue] = useState<number>(countStartMaxValue)
-    const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setButtonDisabled(false)
-        let eValue = Number(e.currentTarget.value)
-        if (eValue >= countMinValue) {
-            setCountMaxValue(eValue)
-
-        }
-        if (eValue < countMinValue) {
-            setCountMaxValue(Number(localStorage.getItem('countMinValue')))
-
-        }
-    }
-
     const [countValue, setCountValue] = useState<number>(countMinValue)
-    const incValue = () => {
-        setCountValue(countValue + 1)
-
-    }
-    const resetValue = () => {
-        setCountValue(countMinValue)
-    }
-    let initialPath: string | null = '/'
-    // if (localStorage.getItem('path') !== '/'){
-    // initialPath = localStorage.getItem('path')}
+    const [blockColor, setBlockColor] = useState('setBlock')
     const [path, setPath] = useState(initialPath)
-    const changePath = (p: string) => {
-        const path = p
-        setPath(path)
-    }
-
     useEffect(() => {
         if (path) {
             localStorage.setItem('path', path)
@@ -93,7 +48,43 @@ function App() {
     useEffect(() => {
         localStorage.setItem('countValue', JSON.stringify(countValue))
     }, [countValue])
+    const setCounter2 = () => {
+        setButtonDisabled(!buttonDisabled)
+        setCountValue(countMinValue)
+    }
+    const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setButtonDisabled(false)
+        let eValue = Number(e.currentTarget.value)
+        if (eValue >= 0) {
+            if (countMaxValue < eValue) {
+                return
+            } else {
+                setCountMinValue(eValue)
+            }
+        }
+    }
+    const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+        setButtonDisabled(false)
+        let eValue = Number(e.currentTarget.value)
+        if (eValue >= countMinValue) {
+            setCountMaxValue(eValue)
+        }
+        if (eValue < countMinValue) {
+            setCountMaxValue(Number(localStorage.getItem('countMinValue')))
+        }
+    }
+    const incValue = () => {
+        setCountValue(countValue + 1)
 
+    }
+    const resetValue = () => {
+        setCountValue(countMinValue)
+    }
+    const changePath = (p: string) => {
+        setCountValue(countMinValue)
+        const path = p
+        setPath(path)
+    }
     const blockButtonsIncReset = (t: string) => {
         return (
             <div className={'buttonBlock'}>
@@ -116,15 +107,12 @@ function App() {
 
             </div>)
     }
-    const [blockColor, setBlockColor] = useState('setBlock')
     const onMouseDown: MouseEventHandler<HTMLLabelElement> = () => {
-
         setBlockColor('setBlockRed')
         setTimeout(() => setBlockColor('setBlock'), 1000)
-
     }
 
-    console.log(path)
+
     return (
         <HashRouter>
 
