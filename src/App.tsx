@@ -85,6 +85,11 @@ function App() {
         const path = p
         setPath(path)
     }
+    const onMouseDown: MouseEventHandler<HTMLLabelElement> = () => {
+        setBlockColor('setBlockRed')
+        setTimeout(() => setBlockColor('setBlock'), 1000)
+    }
+
     const blockButtonsIncReset = (t: string) => {
         return (
             <div className={'buttonBlock'}>
@@ -106,10 +111,6 @@ function App() {
                 </NavLink>
 
             </div>)
-    }
-    const onMouseDown: MouseEventHandler<HTMLLabelElement> = () => {
-        setBlockColor('setBlockRed')
-        setTimeout(() => setBlockColor('setBlock'), 1000)
     }
 
 
