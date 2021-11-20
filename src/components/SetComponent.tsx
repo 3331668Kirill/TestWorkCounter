@@ -21,13 +21,14 @@ export const SetComponent = ({
 
     return (
         <div>
-            <div className={countMinValue === 0 || countMinValue === countMaxValue ? blockColor : 'setBlock'}>
+            <div className={ countMinValue === 0 || countMinValue === countMaxValue
+                          ? blockColor : 'setBlock'}>
                 <label onMouseDown={onMouseDown} tabIndex={0}>
                     set min value:
                     <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue}/>
                 </label>
-                <label onMouseDown={onMouseDown} tabIndex={0}>
-                    set max value:
+                <label onMouseDown={countMaxValue===0 || countMinValue === countMaxValue? onMouseDown: undefined} tabIndex={0} >
+                   set max value:
                     <InputField type={'number'} countValue={countMaxValue} changeValue={changeMaxValue}/>
                 </label>
             </div>

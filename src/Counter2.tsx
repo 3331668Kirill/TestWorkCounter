@@ -23,7 +23,7 @@ export const Counter2 = ({
                 <div>
                 {!props.buttonDisabled
                     ? (<div className={'countBlock2'}> Enter value and press 'SET'
-                            {blockColor === 'setBlockRed'  && countMinValue === 0 || countMinValue === countMaxValue
+                            {blockColor === 'setBlockRed'  && (countMinValue === 0 || countMinValue === countMaxValue)
                                 ? <div style={{color: 'red', fontSize: '20px'}}>Incorrect value</div>
                                 : null}
                         </div>
