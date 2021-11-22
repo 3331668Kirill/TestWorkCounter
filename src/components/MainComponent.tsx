@@ -10,7 +10,7 @@ export type PropsMainComponent = {
     blockColor?:string
 }
 
-export const MainComponent = ({countValue, incValue, resetValue,countMaxValue,blockColor, ...props}: PropsMainComponent) => {
+const MainComp = ({countValue, incValue, resetValue,countMaxValue,blockColor, ...props}: PropsMainComponent) => {
 
     return (<div>
 
@@ -23,3 +23,4 @@ export const MainComponent = ({countValue, incValue, resetValue,countMaxValue,bl
 
     )
 }
+export const MainComponent = React.memo(MainComp)

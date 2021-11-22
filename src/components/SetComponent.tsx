@@ -12,7 +12,7 @@ export type PropsSetComponent = {
     changeMaxValue: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const SetComponent = ({
+const SetComp = ({
                                  countMinValue, countMaxValue,
                                  incValue, resetValue, onMouseDown,
                                  changeMinValue, blockColor,
@@ -27,7 +27,7 @@ export const SetComponent = ({
                     set min value:
                     <InputField type={'number'} countValue={countMinValue} changeValue={changeMinValue}/>
                 </label>
-                <label onMouseDown={countMaxValue===0 || countMinValue === countMaxValue? onMouseDown: undefined} tabIndex={0} >
+                <label onMouseDown={countMinValue === countMaxValue? onMouseDown: undefined} tabIndex={0} >
                    set max value:
                     <InputField type={'number'} countValue={countMaxValue} changeValue={changeMaxValue}/>
                 </label>
@@ -36,5 +36,5 @@ export const SetComponent = ({
         </div>
     )
 }
-
+export const SetComponent = React.memo(SetComp)
 

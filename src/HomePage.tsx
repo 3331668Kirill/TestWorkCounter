@@ -6,7 +6,7 @@ type PropsHomePage = {
     changePath:(p:string)=>void
 }
 
-export const HomePage = (props:PropsHomePage) => {
+const Home = (props:PropsHomePage) => {
 
 const changePath = () =>{
     props.changePath(PATH.COUNTER1)
@@ -27,3 +27,4 @@ const changePath = () =>{
         </>
     )
 }
+export const HomePage = React.memo(Home)

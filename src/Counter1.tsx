@@ -1,7 +1,7 @@
 import React from 'react';
 import {MainComponent, PropsMainComponent} from "./components/MainComponent";
 
-export const Counter1 = ({
+const Count1 = ({
                              countValue, incValue,
                              resetValue, countMaxValue,
                              ...props
@@ -15,3 +15,4 @@ export const Counter1 = ({
 
     )
 }
+export const Counter1 = React.memo(Count1)

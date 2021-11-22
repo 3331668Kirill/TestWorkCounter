@@ -3,27 +3,25 @@ import {MainComponent, PropsMainComponent} from "./components/MainComponent";
 import {PropsSetComponent, SetComponent} from "./components/SetComponent";
 import {Button} from "./components/button";
 
-
-export const Counter2 = ({
-                             countValue, incValue,
-                             resetValue, countMaxValue,
-                             countMinValue, blockColor, onMouseDown,
-                             changeMaxValue, changeMinValue,
-                             ...props
-                         }: PropsMainComponent & PropsSetComponent & {
+export const Count2 = ({
+                           countValue, incValue,
+                           resetValue, countMaxValue,
+                           countMinValue, blockColor, onMouseDown,
+                           changeMaxValue, changeMinValue,
+                           ...props
+                       }: PropsMainComponent & PropsSetComponent & {
     setCounter2: () => void,
     buttonDisabled: boolean
 
 }) => {
 
-//
     return (<div className={'counter2'}>
 
             <span className={'main'}>
                 <div>
                 {!props.buttonDisabled
                     ? (<div className={'countBlock2'}> Enter value and press 'SET'
-                            {blockColor === 'setBlockRed'  && (countMinValue === 0 || countMinValue === countMaxValue)
+                            {blockColor === 'setBlockRed' && (countMinValue === 0 || countMinValue === countMaxValue)
                                 ? <div style={{color: 'red', fontSize: '20px'}}>Incorrect value</div>
                                 : null}
                         </div>
@@ -58,3 +56,4 @@ export const Counter2 = ({
 
     )
 }
+export const Counter2 = React.memo(Count2)
