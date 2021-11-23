@@ -91,6 +91,14 @@
   border-radius: 5px;
 }
 
+.buttonHome{
+  height: 60px;
+  width: 60px;
+  background-color: deepskyblue;
+  border-radius: 100%;
+  font-size: 15px;
+}
+
 .link{
   color: yellow;
   margin: 20px;
