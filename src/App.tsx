@@ -75,7 +75,8 @@ function App() {
         }
     }
     const incValue = () => {
-        setCountValue(c => c + 1)
+        setCountValue(c=> c + 1)
+
     }
     const resetValue = () => {
         setCountValue(countMinValue)
@@ -89,10 +90,21 @@ function App() {
         setBlockColor('setBlockRed')
         setTimeout(() => setBlockColor('setBlock'), 1000)
     }
+
+    const blockButtonsIncReset = (t: string) => {
+        return (
+            <div className={'buttonBlock'}>
+                <Button name={'inc'} callback={incValue} disabled={countValue === countMaxValue}/>
+                <Button name={'reset'} callback={resetValue} disabled={countValue === countMinValue}/>
+                <NavLink to={'set'}>
+                    <Button name={'set'} callback={() => changePath(t)} disabled={false}/>
+                </NavLink>
+
+            </div>)
+    }
     const blockButtonSet = (t: string) => {
         return (
             <div className={'buttonBlock'}>
-
                 <NavLink to={'counter1'}>
                     <Button name={'set'} callback={() => changePath(t)} disabled={false}/>
                 </NavLink>
@@ -100,17 +112,7 @@ function App() {
             </div>)
     }
 
-    const blockButtonsIncReset = (t: string) => {
-        return (
-            <div className={'buttonBlock'}>
-                <Button name={'inc'} callback={incValue} disabled={countValue === countMaxValue}/>
-                <Button name={'reset'} callback={resetValue} disabled={countValue === countMinValue}/>
-                {blockButtonSet(t)}
-            </div>)
-    }
-
-
-    return (
+   return (
         <BrowserRouter>
 
             <div className="App">
