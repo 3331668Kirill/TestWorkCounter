@@ -11,7 +11,7 @@ export const HomePage = React.memo((props:PropsHomePage) => {
 const changePath = () =>{
     props.changePath(PATH.COUNTER1)
 }
-
+    console.log('home')
     return (<>
             <div className="App">
                 <h1> CHOOSE A VARIANT OF COUNTER </h1>

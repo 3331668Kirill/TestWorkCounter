@@ -4,14 +4,11 @@ import React from 'react';
 
 export type PropsMainComponent = {
     countValue: number
-    incValue: () => void
-    resetValue: () => void
     countMaxValue:number
-    blockColor?:string
 }
 
-const MainComp = ({countValue, incValue, resetValue,countMaxValue,blockColor, ...props}: PropsMainComponent) => {
-
+const MainComp = ({countValue, countMaxValue}: PropsMainComponent) => {
+    console.log('Main')
     return (<div>
 
             <div className={'countBlock'} style={countValue === countMaxValue ? {color: 'red'} : {color: ''}}>

@@ -1,16 +1,12 @@
 import React from 'react';
 import {MainComponent, PropsMainComponent} from "./components/MainComponent";
 
-const Count1 = ({
-                             countValue, incValue,
-                             resetValue, countMaxValue,
-                             ...props
-                         }: PropsMainComponent) => {
+const Count1 = ({countValue, countMaxValue}: PropsMainComponent ) => {
+    console.log('Count1')
     return (<>
-            <MainComponent resetValue={resetValue}
-                           countValue={countValue}
+            <MainComponent countValue={countValue}
                            countMaxValue={countMaxValue}
-                           incValue={incValue}/>
+                           />
         </>
 
     )

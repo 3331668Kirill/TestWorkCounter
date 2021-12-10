@@ -10,11 +10,13 @@ export const Count2 = ({
                            changeMaxValue, changeMinValue,
                            ...props
                        }: PropsMainComponent & PropsSetComponent & {
-    setCounter2: () => void,
+    setCounter2: () => void
     buttonDisabled: boolean
+    incValue:() => void
+    resetValue:() => void
 
 }) => {
-
+        console.log('Count2')
     return (<div className={'counter2'}>
 
             <span className={'main'}>
@@ -26,11 +28,10 @@ export const Count2 = ({
                                 : null}
                         </div>
                     )
-                    : <MainComponent resetValue={resetValue}
+                    : <MainComponent
                                      countValue={countValue}
                                      countMaxValue={countMaxValue}
-                                     blockColor={blockColor}
-                                     incValue={incValue}/>}
+                                                                   />}
                     </div>
 
                  <div className={'buttonBlock'}>
@@ -41,7 +42,7 @@ export const Count2 = ({
                  </div>
             </span>
             <span className={'set'}>
-                <SetComponent incValue={incValue} resetValue={resetValue}
+                <SetComponent //resetValue={resetValue}
                               countMinValue={countMinValue} countMaxValue={countMaxValue}
                               blockColor={blockColor} onMouseDown={onMouseDown}
                               changeMinValue={changeMinValue} changeMaxValue={changeMaxValue}/>

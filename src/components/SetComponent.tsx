@@ -2,8 +2,6 @@ import React, {ChangeEvent, MouseEventHandler} from 'react'
 import {InputField} from "./input";
 
 export type PropsSetComponent = {
-    incValue: () => void
-    resetValue: () => void
     countMinValue: number
     countMaxValue: number
     blockColor: string
@@ -12,13 +10,11 @@ export type PropsSetComponent = {
     changeMaxValue: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-const SetComp = ({
-                                 countMinValue, countMaxValue,
-                                 incValue, resetValue, onMouseDown,
+const SetComp = ({countMinValue, countMaxValue,  onMouseDown,
                                  changeMinValue, blockColor,
                                  changeMaxValue, ...props
                              }: PropsSetComponent) => {
-
+    console.log('Set')
     return (
         <div>
             <div className={ countMinValue === 0 || countMinValue === countMaxValue

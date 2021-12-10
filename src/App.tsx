@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useEffect, useState} from 'react';
+import React, {ChangeEvent, MouseEventHandler, useCallback, useEffect, useMemo, useState} from 'react';
 import './App.css';
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import {SetComponent} from "./components/SetComponent";
@@ -53,7 +53,7 @@ function App() {
         setButtonDisabled(!buttonDisabled)
         setCountValue(countMinValue)
     }
-    const changeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeMinValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setButtonDisabled(false)
         let eValue = Number(e.currentTarget.value)
         if (eValue >= 0) {
@@ -63,8 +63,8 @@ function App() {
                 setCountMinValue(eValue)
             }
         }
-    }
-    const changeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+    }, [countMinValue, countMaxValue, buttonDisabled])
+    const changeMaxValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setButtonDisabled(false)
         let eValue = Number(e.currentTarget.value)
         if (eValue >= countMinValue) {
@@ -73,23 +73,24 @@ function App() {
         if (eValue < countMinValue) {
             setCountMaxValue(Number(localStorage.getItem('countMinValue')))
         }
-    }
+    }, [countMinValue, countMaxValue, buttonDisabled])
     const incValue = () => {
-        setCountValue(c=> c + 1)
+        setCountValue(c => c + 1)
 
     }
-    const resetValue = () => {
+
+    const resetValue = useCallback(() => {
         setCountValue(countMinValue)
-    }
+    }, [countValue])
     const changePath = (p: string) => {
         setCountValue(countMinValue)
         const path = p
         setPath(path)
     }
-    const onMouseDown: MouseEventHandler<HTMLLabelElement> = () => {
+    const onMouseDown: MouseEventHandler<HTMLLabelElement> = useCallback(() => {
         setBlockColor('setBlockRed')
         setTimeout(() => setBlockColor('setBlock'), 1000)
-    }
+    }, [blockColor])
 
     const blockButtonsIncReset = (t: string) => {
         return (
@@ -112,17 +113,16 @@ function App() {
             </div>)
     }
 
-   return (
+    return (
         <BrowserRouter>
 
             <div className="App">
                 <header className="App-header">
                     <Routes>
 
-                        <Route path={PATH.COUNTER1} element={<Counter1 resetValue={resetValue}
-                                                                       countValue={countValue}
+                        <Route path={PATH.COUNTER1} element={<Counter1 countValue={countValue}
                                                                        countMaxValue={countMaxValue}
-                                                                       incValue={incValue}/>}
+                        />}
 
                         />
 
@@ -142,10 +142,8 @@ function App() {
                         />}
                         />
 
-                        <Route path={PATH.SET} element={<SetComponent resetValue={resetValue}
-                                                                      countMinValue={countMinValue}
+                        <Route path={PATH.SET} element={<SetComponent countMinValue={countMinValue}
                                                                       countMaxValue={countMaxValue}
-                                                                      incValue={incValue}
                                                                       blockColor={blockColor}
                                                                       onMouseDown={onMouseDown}
                                                                       changeMinValue={changeMinValue}
