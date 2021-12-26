@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {ChangeEvent, MouseEventHandler, useCallback, useEffect, useState} from 'react';
 import './App.css';
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import {SetComponent} from "./components/SetComponent";
@@ -6,6 +6,8 @@ import {Button} from "./components/button";
 import {HomePage} from "./HomePage";
 import {Counter1} from "./Counter1";
 import {Counter2} from "./Counter2";
+import {} from './redux/reducer'
+import {} from './redux/store'
 
 
 export type TypePath = {
@@ -149,11 +151,12 @@ function App() {
                                                                       changeMinValue={changeMinValue}
                                                                       changeMaxValue={changeMaxValue}
                         />}/>
+                        <Route path={'TestWorkCounter' } element={<HomePage changePath={changePath}/>}/>
                         <Route path={PATH.HOME} element={<HomePage changePath={changePath}/>}/>
                     </Routes>
                     {path === PATH.COUNTER1 && blockButtonsIncReset(PATH.SET)}
                     {path === PATH.SET && blockButtonSet(PATH.COUNTER1)}
-                    {path === PATH.HOME && null}
+                    {/*{path === PATH.HOME && null}*/}
                     <NavLink to={PATH.HOME}>
                         <Button name={'HOME'} callback={() => changePath(PATH.HOME)} disabled={false}/>
                     </NavLink>
