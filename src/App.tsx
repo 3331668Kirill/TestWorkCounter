@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, MouseEventHandler, useCallback, useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import {SetComponent} from "./components/SetComponent";
@@ -6,8 +6,16 @@ import {Button} from "./components/button";
 import {HomePage} from "./HomePage";
 import {Counter1} from "./Counter1";
 import {Counter2} from "./Counter2";
-import {} from './redux/reducer'
-import {} from './redux/store'
+import {
+    setBlockColorAC,
+    setButtonDisabledAC,
+    setCountMaxValueAC,
+    setCountMinValueAC,
+    setCountValueAC,
+    setPathAC
+} from './redux/reducer'
+import {AppRootStateType} from './redux/store'
+import {useDispatch, useSelector} from "react-redux";
 
 
 export type TypePath = {
@@ -27,15 +35,15 @@ export const PATH: TypePath = {
 }
 
 function App() {
-    let initialPath: string | null = document.location.pathname
-    let countStartMaxValue = Number(localStorage.getItem('countMaxValue'))
-    let countStartMinValue = Number(localStorage.getItem('countMinValue'))
-    const [buttonDisabled, setButtonDisabled] = useState(false)
-    const [countMinValue, setCountMinValue] = useState<number>(countStartMinValue)
-    const [countMaxValue, setCountMaxValue] = useState<number>(countStartMaxValue)
-    const [countValue, setCountValue] = useState<number>(countMinValue)
-    const [blockColor, setBlockColor] = useState('setBlock')
-    const [path, setPath] = useState(initialPath)
+    const dispatch = useDispatch()
+    const buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.count.buttonDisabled)
+    const countMinValue = useSelector<AppRootStateType, number>(state => state.count.countMinValue)
+    const countMaxValue = useSelector<AppRootStateType, number>(state => state.count.countMaxValue)
+    const countValue = useSelector<AppRootStateType, number>(state => state.count.countValue)
+    const blockColor = useSelector<AppRootStateType, string>(state => state.count.blockColor)
+    const path = useSelector<AppRootStateType, string|null>(state => state.count.path)
+
+
     useEffect(() => {
         if (path) {
             localStorage.setItem('path', path)
@@ -52,46 +60,45 @@ function App() {
         localStorage.setItem('countValue', JSON.stringify(countValue))
     }, [countValue])
     const setCounter2 = () => {
-        setButtonDisabled(!buttonDisabled)
-        setCountValue(countMinValue)
+        dispatch(setButtonDisabledAC(!buttonDisabled))
+        dispatch(setCountValueAC(countMinValue))
     }
     const changeMinValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setButtonDisabled(false)
+        dispatch(setButtonDisabledAC(false))
         let eValue = Number(e.currentTarget.value)
         if (eValue >= 0) {
             if (countMaxValue < eValue) {
                 return
             } else {
-                setCountMinValue(eValue)
+                dispatch(setCountMinValueAC(eValue))
             }
         }
     }, [countMinValue, countMaxValue, buttonDisabled])
     const changeMaxValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setButtonDisabled(false)
+        dispatch(setButtonDisabledAC(false))
         let eValue = Number(e.currentTarget.value)
         if (eValue >= countMinValue) {
-            setCountMaxValue(eValue)
+            dispatch(setCountMaxValueAC(eValue))
         }
         if (eValue < countMinValue) {
-            setCountMaxValue(Number(localStorage.getItem('countMinValue')))
+            dispatch(setCountMaxValueAC(Number(localStorage.getItem('countMinValue'))))
         }
     }, [countMinValue, countMaxValue, buttonDisabled])
     const incValue = () => {
-        setCountValue(c => c + 1)
+        dispatch(setCountValueAC(countValue + 1))
 
     }
 
     const resetValue = useCallback(() => {
-        setCountValue(countMinValue)
+        dispatch(setCountValueAC(countMinValue))
     }, [countValue])
     const changePath = (p: string) => {
-        setCountValue(countMinValue)
-        const path = p
-        setPath(path)
+        dispatch(setCountValueAC(countMinValue))
+        dispatch(setPathAC(p))
     }
     const onMouseDown: MouseEventHandler<HTMLLabelElement> = useCallback(() => {
-        setBlockColor('setBlockRed')
-        setTimeout(() => setBlockColor('setBlock'), 1000)
+        dispatch(setBlockColorAC('setBlockRed'))
+        setTimeout(() => dispatch(setBlockColorAC('setBlock')), 1000)
     }, [blockColor])
 
     const blockButtonsIncReset = (t: string) => {
@@ -141,8 +148,7 @@ function App() {
                                                                        buttonDisabled={buttonDisabled}
 
 
-                        />}
-                        />
+                        />}/>
 
                         <Route path={PATH.SET} element={<SetComponent countMinValue={countMinValue}
                                                                       countMaxValue={countMaxValue}
@@ -156,7 +162,6 @@ function App() {
                     </Routes>
                     {path === PATH.COUNTER1 && blockButtonsIncReset(PATH.SET)}
                     {path === PATH.SET && blockButtonSet(PATH.COUNTER1)}
-                    {/*{path === PATH.HOME && null}*/}
                     <NavLink to={PATH.HOME}>
                         <Button name={'HOME'} callback={() => changePath(PATH.HOME)} disabled={false}/>
                     </NavLink>
