@@ -149,11 +149,12 @@ function App() {
                                                                       changeMinValue={changeMinValue}
                                                                       changeMaxValue={changeMaxValue}
                         />}/>
+                        <Route path={'TestWorkCounter' } element={<HomePage changePath={changePath}/>}/>
                         <Route path={PATH.HOME} element={<HomePage changePath={changePath}/>}/>
                     </Routes>
                     {path === PATH.COUNTER1 && blockButtonsIncReset(PATH.SET)}
                     {path === PATH.SET && blockButtonSet(PATH.COUNTER1)}
-                    {path === PATH.HOME && null}
+
                     <NavLink to={PATH.HOME}>
                         <Button name={'HOME'} callback={() => changePath(PATH.HOME)} disabled={false}/>
                     </NavLink>
