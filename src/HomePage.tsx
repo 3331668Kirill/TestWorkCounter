@@ -19,7 +19,7 @@ const changePath = () =>{
                     <NavLink to={PATH.COUNTER1}>
                         <span className={'link'} onClick={changePath}>COUNTER 1 </span>
                     </NavLink>
-                    <NavLink to={'counter2'}>
+                    <NavLink to={PATH.COUNTER2}>
                         <span className={'link'}> COUNTER 2</span>
                     </NavLink>
                 </div>
